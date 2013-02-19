@@ -2,6 +2,10 @@ package GML_Geometry;
 
 import java.io.*;
 
+/*
+ * this is the entry point
+ */
+
 public class Test_GML {
 	
 	public static String poly_file_name = "D:\\SIG\\polys10.txt";
