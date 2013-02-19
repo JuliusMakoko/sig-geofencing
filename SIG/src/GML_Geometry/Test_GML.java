@@ -1,6 +1,7 @@
 package GML_Geometry;
 
 import java.io.*;
+import java.text.*;
 import java.util.TreeMap;
 
 /*
@@ -19,6 +20,8 @@ public class Test_GML {
 	
 	public static void main(String[] args) {
 		
+		long startTime = System.currentTimeMillis();
+	
 		if (! Validate_cmdln(cmdln)){
 			System.out.println("Illigal predicate string !!");
 			return;
@@ -73,6 +76,20 @@ public class Test_GML {
 			}
 			
 			out_file.close();
+			
+			//for the execution time
+			long endTime   = System.currentTimeMillis();
+			long totalTime = endTime - startTime;
+			
+			NumberFormat formatter = new DecimalFormat("#0.00000");
+			System.out.println("Execution time is " + formatter.format(totalTime / 1000d) + " seconds");
+			
+			//for the total memory
+			NumberFormat format = NumberFormat.getInstance();
+			long used  = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+			StringBuilder mem = new StringBuilder();	
+			mem.append("Memory used: " + format.format(used / 1024 / 1024) + "M");
+			System.out.println(mem.toString());
 		
 		}
 		catch( Exception ex ){
