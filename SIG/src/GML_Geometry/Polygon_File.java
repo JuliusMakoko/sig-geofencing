@@ -8,6 +8,7 @@ public class Polygon_File {
 	
 	public int n_Polygons;
 	public int n_MPs;
+	public static String NEW_LINE = System.getProperty("line.separator");
 	
 	Polygon_File(String cmdln){
 		Polygons = new HashMap<Integer, Moving_Polygon>();
@@ -52,16 +53,19 @@ public class Polygon_File {
 	
 	public String Process_One_Pt(Point pt){	
 		StringBuilder result = new StringBuilder();
+		String msg = "";
 		switch(option.p){
 			case INSIDE:
 				for (Moving_Polygon MP: Polygons.values()) {
-					result.append(MP.Predicate_Inside(pt));
+					msg = MP.Predicate_Inside(pt);
+					if (! msg.equals("")) result.append(msg + NEW_LINE);
 				}
 				break;
 			
 			case WITHIN:
 				for (Moving_Polygon MP: Polygons.values()) {
-					result.append(MP.Predicate_Within(pt, option.Dist));
+					msg = MP.Predicate_Within(pt, option.Dist);
+					if (! msg.equals("")) result.append(msg + NEW_LINE);
 				}
 				break;
 				

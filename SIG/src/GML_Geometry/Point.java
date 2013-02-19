@@ -136,7 +136,6 @@ class Point extends element{
 	
 	//check if the point is outside the bounding box of the polygon
 	public boolean Out_of_Bound(Polygon poly){
-		
 		return (this.x > poly.BB.right) || (this.x < poly.BB.left) || (this.y > poly.BB.up) || (this.y < poly.BB.bottom);	
 	}
 	

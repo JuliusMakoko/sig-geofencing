@@ -20,7 +20,7 @@ class Polygon extends element {
 		this.OB = outBound;
 		
 		//initialize and calculate the bounding box
-		BoundingBox BB = new BoundingBox(this.OB);
+		this.BB = new BoundingBox(this.OB);
 	}
 	
 	public void Add_Inner_Boundary(InnerBoundary inBound){
@@ -70,7 +70,7 @@ class BoundingBox {
 	public double bottom;
 	public double up;
 	
-	BoundingBox(OuterBoundary OB){
+	public BoundingBox(OuterBoundary OB){
 		int i = 0;
 		for (Point pt: OB.lr.pointArray){
 			if (i == 0){

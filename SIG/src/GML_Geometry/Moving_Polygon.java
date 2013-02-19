@@ -34,15 +34,16 @@ public class Moving_Polygon {
 		else{
 			//find the latest polygon based on the time stamp of the point
 			int index = 0;
-			for (int i=0;i<this.poly_list.size()-1;i++){
+			for (int i=0;i<this.poly_list.size();i++){
 				if (pt.Seq < this.poly_list.get(i).Seq){
 					index = i -1;
 					break;
 				}	
+				if (i == poly_list.size()-1) index = i;
 			}
 			Polygon poly = this.poly_list.get(index);
-			if (pt.Inside(poly)){
-				return pt.Print_Out() + poly.Print_Out();
+			if (pt.ArcInside(poly)){
+				return pt.Print_Out() +":" + poly.Print_Out();
 			}
 			else return "";
 		}	
@@ -56,11 +57,12 @@ public class Moving_Polygon {
 		else{
 			//find the latest polygon based on the time stamp of the point
 			int index = 0;
-			for (int i=0;i<this.poly_list.size()-1;i++){
+			for (int i=0;i<this.poly_list.size();i++){
 				if (pt.Seq < this.poly_list.get(i).Seq){
 					index = i -1;
 					break;
 				}	
+				if (i == poly_list.size()-1) index = i;
 			}
 			
 			Polygon poly = this.poly_list.get(index);

@@ -1,6 +1,6 @@
 package GML_Geometry;
 
-public class GML_Point_Parser {
+class GML_Point_Parser {
 	
 	public static Point Parse_Point(String line){
 		
