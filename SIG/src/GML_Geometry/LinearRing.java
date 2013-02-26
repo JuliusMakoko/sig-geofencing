@@ -2,7 +2,7 @@ package GML_Geometry;
 
 import java.util.ArrayList;
 
-class LinearRing{
+public class LinearRing{
 	//linear ring contains a series of points
 	private int length;
 	public ArrayList <Point> pointArray;

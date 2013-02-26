@@ -2,14 +2,14 @@ package GML_Geometry;
 
 import java.util.ArrayList;
 
-class Polygon extends element {
+public class Polygon extends element {
 	
 	//polygon contains one outer boundary and zero or more inner boundaries
-	OuterBoundary OB;
-	ArrayList <InnerBoundary> IBs;
+	public OuterBoundary OB;
+	public ArrayList <InnerBoundary> IBs;
 	
 	//Bounding box
-	BoundingBox BB;
+	public BoundingBox BB;
 	
 	public Polygon(int id, int seq){
 		this.ID = id;
@@ -63,29 +63,3 @@ class Polygon extends element {
 	}
 }
 
-//Bounding box of the polygon
-class BoundingBox {
-	public double left;
-	public double right;
-	public double bottom;
-	public double up;
-	
-	public BoundingBox(OuterBoundary OB){
-		int i = 0;
-		for (Point pt: OB.lr.pointArray){
-			if (i == 0){
-				left = pt.x;
-				right = pt.x;
-				up = pt.y;
-				bottom = pt.y;
-				i = 1;
-			} 
-			else{
-				left   = Math.min(left, pt.x);
-				right  = Math.max(right, pt.x);
-				up	   = Math.max(up, pt.y);
-				bottom = Math.min(bottom, pt.y);
-			}
-		}
-	}
-}

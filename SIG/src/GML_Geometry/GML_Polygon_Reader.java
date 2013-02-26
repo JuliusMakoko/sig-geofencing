@@ -10,6 +10,10 @@ public class GML_Polygon_Reader {
 		this.input_file_name = file_name;
 	}
 	
+	public GML_Polygon_Reader(){
+		
+	}
+	
 	public void Build_Polygon_Index(Polygon_File PF) throws IOException{
 		BufferedReader in = new BufferedReader(new FileReader(input_file_name));;
 		try{
@@ -31,7 +35,7 @@ public class GML_Polygon_Reader {
 			
 	}
 	
-	private Polygon Parse_Polygon(String line){
+	public Polygon Parse_Polygon(String line){
 		int start, end, pos;
 		String head_str, gml_str;
 		String[] temp_str_array, coord_array;
