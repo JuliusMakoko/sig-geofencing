@@ -6,37 +6,50 @@ import java.util.HashMap;
 
 public class Detector {
 	
-	public static String test_file_name = "D:\\SIG\\polys10.txt";
-	public static String truth_file_name = "D:\\SIG\\points500.txt";
+	public static String truth_file_name = "D:\\SIG\\output_10_500.txt";
+	public static String test_file_name = "D:\\SIG\\truth_10_500.txt";
 	
 	public static HashMap<String, ArrayList<String>> truth;
 	
-	public static void main() throws IOException{
-		BufferedReader truth_file = new BufferedReader(new FileReader(truth_file_name));
+	public static void main(String[] args){
+
 		String line;
 		String ID = "";
 		ArrayList <String> content = null;
-		while ((line = truth_file.readLine()) != null){
-			if (! ID.equals(line.split(":")[0])){
-				truth.put(ID, content);
-				content = new ArrayList<String>();
-				content.add(line);
+		truth = new HashMap<String, ArrayList<String>>();
+		try{
+			BufferedReader truth_file = new BufferedReader(new FileReader(truth_file_name));
+			while ((line = truth_file.readLine()) != null){
+				if (! ID.equals(line.split(":")[0])){
+					if (content != null) {
+						truth.put(ID, content);
+					}
+					ID = line.split(":")[0];
+					content = new ArrayList<String>();
+					content.add(line.trim());
+				}
+				else{
+					content.add(line.trim());
+				}
+
+			}	
+			truth_file.close();   
+
+			int count = 0;
+			BufferedReader test_file = new BufferedReader(new FileReader(test_file_name));
+			while ((line = test_file.readLine()) != null){
+				ID = line.split(":")[0];
+				if (!truth.containsKey(ID) || !contains(truth.get(ID),line.trim())){
+					System.out.println(line);
+					count ++;
+				}
 			}
-			else{
-				content.add(line);
-			}
-			
-		}	
-		truth_file.close();   
-		
-		BufferedReader test_file = new BufferedReader(new FileReader(test_file_name));
-		while ((line = test_file.readLine()) != null){
-			ID = line.split(":")[0];
-			if (!truth.containsValue(ID) || !contains(truth.get(ID),line)){
-				System.out.println(line);
-			}
+			test_file.close();
+			System.out.println("differents: " + count);
 		}
-		test_file.close();   
+		catch( Exception ex ){
+			System.out.println(ex.toString());
+		}		
 	}
 
 	public static boolean contains(ArrayList<String> content, String line){
