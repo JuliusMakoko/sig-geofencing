@@ -1,7 +1,7 @@
 package GML_Geometry;
 
 public class Point extends element{
-	double x,y;
+	public double x,y;
 	
 	Point(double x,double y)
 	{
