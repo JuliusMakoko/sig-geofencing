@@ -10,9 +10,9 @@ import java.util.TreeMap;
 
 public class Test_GML {
 	
-	public static String poly_file_name = "D:\\SIG\\polys10.txt";
-	public static String pt_file_name = "D:\\SIG\\points500.txt";
-	public static String out_file_name = "D:\\SIG\\output_10_500.txt";
+	public static String poly_file_name = "D:\\SIG\\TrainingDataSet\\polys15.txt";
+	public static String pt_file_name =   "D:\\SIG\\TrainingDataSet\\points1000.txt";
+	public static String out_file_name = "D:\\SIG\\output_15_1000.txt";
 	public static String cmdln = "INSIDE";
 	public static String NEW_LINE = System.getProperty("line.separator");
 	

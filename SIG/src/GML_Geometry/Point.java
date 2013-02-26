@@ -1,6 +1,6 @@
 package GML_Geometry;
 
-class Point extends element{
+public class Point extends element{
 	double x,y;
 	
 	Point(double x,double y)
