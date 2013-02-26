@@ -55,7 +55,7 @@ class Point extends element{
 		}
 		else{
 			Ray r = new Ray(this.x, this.y);
-			//check all the segments of the outter boundary
+			//check all the segments of the outer boundary
 			for (int i = 0; i< poly.OB.lr.pointArray.size()-1;i++){
 				
 				Point st_pt = poly.OB.lr.pointArray.get(i);
@@ -107,7 +107,7 @@ class Point extends element{
 	//check if the point is within a certain distance of the polygon
 	public boolean Within(Polygon poly, Double dist){
 		
-		//check all the points on the outter boundary
+		//check all the points on the outer boundary
 		for (Point pt: poly.OB.lr.pointArray){
 			if (this.Distance(pt) < dist) {
 				return true;
@@ -142,9 +142,7 @@ class Point extends element{
 	// redefine a function to check if the point is inside a polygon
 	public boolean ArcInside(Polygon poly){
 		
-		int wn1 = 0;
-		int wn2 = 0;
-		int wn;
+		int wn = 0;;
 		int i,j;
 		double tempvalue;
 		
@@ -153,7 +151,7 @@ class Point extends element{
 	    }
 	    else {
 			
-			// check all the segments of the outboundary
+			// check all the segments of the out boundary
             for (i = 0; i< poly.OB.lr.pointArray.size()-1;i++){
 				
 				Point st_pt = poly.OB.lr.pointArray.get(i);
@@ -164,14 +162,14 @@ class Point extends element{
 				if (seg.Point_on_Segment(this) == true) return true; // it means the point is in the segment
 				else {
 					
-					tempvalue = (end_pt.x-st_pt.x)*(st_pt.y-this.y)-(end_pt.y-st_pt.y)*(st_pt.x-this.x);
+					tempvalue = (end_pt.x-st_pt.x)*(this.y-st_pt.y)-(end_pt.y-st_pt.y)*(this.x-st_pt.x);
 					if (this.y >= st_pt.y && this.y < end_pt.y)
 					{ // above the segment
-						if (tempvalue >0) ++wn1;
+						if (tempvalue >0) wn = wn + 1;
 				    }
 				    else if (this.y < st_pt.y && this.y >= end_pt.y)
 				    {// below the segment
-						if (tempvalue <0) --wn1;
+						if (tempvalue <0) wn = wn - 1;
 				    }
 				}
 			}
@@ -189,19 +187,18 @@ class Point extends element{
             			if (seg.Point_on_Segment(this) == true) return true;  // it means the point is in the segment
             			else {
             				
-            				tempvalue = (end_pt.x-st_pt.x)*(st_pt.y-this.y)-(end_pt.y-st_pt.y)*(st_pt.x-this.x);
+            				tempvalue = (end_pt.x-st_pt.x)*(this.y-st_pt.y)-(end_pt.y-st_pt.y)*(this.x-st_pt.x);
             				if (this.y >= st_pt.y && this.y < end_pt.y){ // above the segment
-            					if (tempvalue >0) ++wn2;
+            					if (tempvalue >0) wn = wn + 1;
             				}
             				else if (this.y < st_pt.y && this.y >= end_pt.y){// below the segment
-            					if (tempvalue <0) --wn2;
+            					if (tempvalue <0) wn = wn - 1;
             				}
             			}
             		}
             	}	
             }
             		 
-            wn = wn1 + wn2;
             if (wn == 0) return false;
             else return true;
             		
