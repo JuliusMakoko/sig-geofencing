@@ -6,8 +6,8 @@ import java.util.HashMap;
 
 public class Detector {
 	
-	public static String truth_file_name = "D:\\SIG\\polys15_points500_INSIDE_out";
-	public static String test_file_name = "D:\\SIG\\output_15_500.txt";
+	public static String truth_file_name = "D:\\SIG\\TrainingDataSet\\polys15_points1000_INSIDE_out";
+	public static String test_file_name = "D:\\SIG\\output_15_1000.txt";
 	
 	public static HashMap<String, ArrayList<String>> truth;
 	
