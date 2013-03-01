@@ -6,8 +6,8 @@ public class Polygon_File {
 	private HashMap<Integer, Moving_Polygon> Polygons;
 	private Predicate option;
 	
-	public int n_Polygons;
-	public int n_MPs;
+	public int n_Polygons;  //total number of polygons
+	public int n_MPs;       //number of polygons with unique ID
 	public static String NEW_LINE = System.getProperty("line.separator");
 	
 	Polygon_File(String cmdln){
@@ -45,6 +45,7 @@ public class Polygon_File {
 	//sort each moving polygon in the map based on time stamp
 	public void Arrange(){
 		for (Moving_Polygon MP: Polygons.values()){
+			//if (this.option.p == Pred.INSIDE) 
 			MP.Sort();
 			n_MPs ++;
 			n_Polygons += MP.n_Status;

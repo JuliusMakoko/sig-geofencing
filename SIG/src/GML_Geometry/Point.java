@@ -107,6 +107,45 @@ public class Point extends element{
 	//check if the point is within a certain distance of the polygon
 	public boolean Within(Polygon poly, Double dist){
 		
+		if (this.Out_of_Bound(poly)){
+			switch(this.Quadrant(poly.BB)){
+				case 1: {
+					if (this.Distance(new Point(poly.BB.left,poly.BB.up))>= dist) return false;
+					else break; 
+				}
+				case 2:{
+					if (this.y - poly.BB.up >= dist) return false;
+					else break;
+				}
+				case 3:{
+					if (this.Distance(new Point(poly.BB.right,poly.BB.up))>= dist) return false;
+					else break;  
+				}
+				case 4:{
+					if (this.x - poly.BB.right >= dist) return false;
+					else break;
+				}
+				case 5:{
+					if (this.Distance(new Point(poly.BB.right,poly.BB.bottom))>= dist) return false;
+					else break;
+				}
+				case 6:{
+					if (poly.BB.bottom - this.y >= dist) return false;
+					else break;
+				}
+				case 7:{
+					if (this.Distance(new Point(poly.BB.left,poly.BB.bottom))>= dist) return false;
+					else break;  
+				}
+				case 8:{
+					if (poly.BB.left - this.x >= dist) return false;
+					else break;
+				}
+				default: System.out.println("something is wrong");
+						 break;
+			} 
+		}
+
 		//check all the points on the outer boundary
 		for (Point pt: poly.OB.lr.pointArray){
 			if (this.Distance(pt) < dist) {
@@ -131,13 +170,31 @@ public class Point extends element{
 		if (this.ArcInside(poly)){
 			return true;
 		}
-		
+
 		return false;
 	}
 	
 	//check if the point is outside the bounding box of the polygon
 	public boolean Out_of_Bound(Polygon poly){
 		return (this.x > poly.BB.right) || (this.x < poly.BB.left) || (this.y > poly.BB.up) || (this.y < poly.BB.bottom);	
+	}
+	
+	//return the positional relationship between the point and the bounding box of polygon
+	/*  1 2 3
+	 *  8 P 4
+	 *  7 6 5
+	 */ 
+	
+	public int Quadrant(BoundingBox BB){
+		if (this.x <= BB.left && this.y >= BB.up) return 1;
+		if (this.x > BB.left && this.x < BB.right && this.y >= BB.up) return 2;
+		if (this.x >= BB.right && this.y >= BB.up) return 3;
+		if (this.x >= BB.right && this.y < BB.up && this.y > BB.bottom) return 4;
+		if (this.x >= BB.right && this.y <= BB.bottom) return 5;
+		if (this.x > BB.left && this.x < BB.right && this.y <= BB.bottom) return 6;
+		if (this.x <= BB.left && this.y <= BB.bottom) return 7;
+		if (this.x < BB.left && this.y > BB.bottom && this.y < BB.up) return 8;
+		return 0;
 	}
 	
 	// redefine a function to check if the point is inside a polygon

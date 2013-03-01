@@ -51,26 +51,22 @@ public class Moving_Polygon {
 	
 	//check if the point is within any polygon in the list of time sequence
 	public String Predicate_Within(Point pt, Double dist){
+
 		if (pt.Seq < this.poly_list.get(0).Seq){
 			return "";
 		}
-		else{
-			//find the latest polygon based on the time stamp of the point
-			int index = 0;
-			for (int i=0;i<this.poly_list.size();i++){
-				if (pt.Seq < this.poly_list.get(i).Seq){
-					index = i -1;
-					break;
-				}	
-				if (i == poly_list.size()-1) index = i;
+		
+		StringBuilder result = new StringBuilder();
+		boolean flag = false;
+		for (Polygon poly: this.poly_list){
+			if (pt.Seq < poly.Seq) break;
+			else if (pt.Within(poly, dist)) {
+				result.append(pt.Print_Out() + ":" + poly.Print_Out());
+				flag = true;
 			}
-			
-			Polygon poly = this.poly_list.get(index);
-			if (pt.Within(poly, dist)){
-				return pt.Print_Out() + ":" + poly.Print_Out();
-			}
-			else return "";
-		}	
+		}
+		if (flag) return result.toString();
+		else return "";
 	}
 	
 	@Override
