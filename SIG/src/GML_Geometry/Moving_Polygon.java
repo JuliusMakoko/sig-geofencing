@@ -67,7 +67,7 @@ public class Moving_Polygon {
 			
 			Polygon poly = this.poly_list.get(index);
 			if (pt.Within(poly, dist)){
-				return pt.Print_Out() + poly.Print_Out();
+				return pt.Print_Out() + ":" + poly.Print_Out();
 			}
 			else return "";
 		}	
