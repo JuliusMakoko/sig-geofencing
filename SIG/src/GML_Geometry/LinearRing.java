@@ -8,16 +8,18 @@ public class LinearRing{
 	public ArrayList <Point> pointArray;
 	
 	public int get_length(){
-		length = this.pointArray.size();
+		//length = this.pointArray.size();
 		return length;
 	}
 	
 	LinearRing(){
 		pointArray = new ArrayList<Point>();
+		this.length = 0;
 	}
 	
 	public void Add_Point(Point pt){
 		this.pointArray.add(pt);
+		this.length ++;
 	}
 	
 	//for test, print out the points within
