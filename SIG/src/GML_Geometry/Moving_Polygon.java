@@ -51,11 +51,7 @@ public class Moving_Polygon {
 	
 	//check if the point is within any polygon in the list of time sequence
 	public String Predicate_Within(Point pt, Double dist){
-
-		if (pt.Seq < this.poly_list.get(0).Seq){
-			return "";
-		}
-		
+	
 		StringBuilder result = new StringBuilder();
 		boolean flag = false;
 		for (Polygon poly: this.poly_list){
