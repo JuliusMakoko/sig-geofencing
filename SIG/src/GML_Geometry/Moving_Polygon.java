@@ -59,6 +59,8 @@ public class Moving_Polygon {
 		StringBuilder result = new StringBuilder();
 		boolean flag = false;
 		for (Polygon poly: this.poly_list){
+			
+			//point's seq can not be larger than the polygon's 
 			if (pt.Seq < poly.Seq) break;
 			else if (pt.Within(poly, dist)) {
 				result.append(pt.Print_Out() + ":" + poly.Print_Out());
