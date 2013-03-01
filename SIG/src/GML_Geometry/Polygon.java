@@ -26,6 +26,7 @@ public class Polygon extends element {
 	public void Add_Inner_Boundary(InnerBoundary inBound){
 		if (this.IBs == null){
 			IBs = new ArrayList <InnerBoundary>();
+			IBs.add(inBound);
 		} 
 		else{
 			IBs.add(inBound);
