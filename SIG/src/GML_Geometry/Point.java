@@ -131,7 +131,8 @@ public class Point extends element{
 		if (this.ArcInside(poly)){
 			return true;
 		}
-		else return false;
+		
+		return false;
 	}
 	
 	//check if the point is outside the bounding box of the polygon
