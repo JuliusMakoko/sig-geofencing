@@ -43,70 +43,9 @@ public class Point extends element{
 	public double Distance(Point pt){
 		return Math.sqrt(Math.pow((this.x - pt.x), 2) + Math.pow((this.y - pt.y), 2));
 	}
-	
-	//check if the point is inside the polygon
-	public boolean Inside(Polygon poly){
 		
-		int count_intersection = 0;
-		int n_intersection = 0;
-		
-		if (this.Out_of_Bound(poly)) {
-			return false;
-		}
-		else{
-			Ray r = new Ray(this.x, this.y);
-			//check all the segments of the outer boundary
-			for (int i = 0; i< poly.OB.lr.pointArray.size()-1;i++){
-				
-				Point st_pt = poly.OB.lr.pointArray.get(i);
-				Point end_pt = poly.OB.lr.pointArray.get(i + 1);
-				
-				Segment seg = new Segment(st_pt,end_pt);
-				n_intersection = r.Segment_Intersection(seg);
-				
-				//point on the segment
-				if (n_intersection == -1){
-					return true;
-				}
-				else
-				{
-					count_intersection += n_intersection;
-				}
-			}
-			
-			//check all the segments of the inner boundary
-			if (poly.IBs != null){
-				for (InnerBoundary IB: poly.IBs){
-					for (int j = 0; j < IB.lr.pointArray.size()-1; j++){
-						Point st_pt = IB.lr.pointArray.get(j);
-						Point end_pt = IB.lr.pointArray.get(j + 1);
-						
-						Segment seg = new Segment(st_pt,end_pt);
-						n_intersection = r.Segment_Intersection(seg);
-						
-						//point on the segment
-						if (n_intersection == -1){ 
-							return true;
-						}
-						else
-						{
-							count_intersection += n_intersection;
-						}
-					}
-				}
-			} 
-		}
-		
-		
-		if (count_intersection % 2 == 0 ){
-			return false;
-		}
-		else return true;
-	}
-	
 	//check if the point is within a certain distance of the polygon
-	public boolean Within(Polygon poly, Double dist){
-		
+	public boolean Within(Polygon poly, Double dist){	
 		if (this.Out_of_Bound(poly)){
 			switch(this.Quadrant(poly.BB)){
 				case 1: {
@@ -180,11 +119,10 @@ public class Point extends element{
 	}
 	
 	//return the positional relationship between the point and the bounding box of polygon
-	/*  1 2 3
-	 *  8 P 4
-	 *  7 6 5
+	/*  1   2  3
+	 *  8  BB  4
+	 *  7   6  5
 	 */ 
-	
 	public int Quadrant(BoundingBox BB){
 		if (this.x <= BB.left && this.y >= BB.up) return 1;
 		if (this.x > BB.left && this.x < BB.right && this.y >= BB.up) return 2;
@@ -261,5 +199,65 @@ public class Point extends element{
             else return true;
             		
 		}
+	}
+	
+	//check if the point is inside the polygon
+	public boolean Inside(Polygon poly){
+		
+		int count_intersection = 0;
+		int n_intersection = 0;
+		
+		if (this.Out_of_Bound(poly)) {
+			return false;
+		}
+		else{
+			Ray r = new Ray(this.x, this.y);
+			//check all the segments of the outer boundary
+			for (int i = 0; i< poly.OB.lr.pointArray.size()-1;i++){
+				
+				Point st_pt = poly.OB.lr.pointArray.get(i);
+				Point end_pt = poly.OB.lr.pointArray.get(i + 1);
+				
+				Segment seg = new Segment(st_pt,end_pt);
+				n_intersection = r.Segment_Intersection(seg);
+				
+				//point on the segment
+				if (n_intersection == -1){
+					return true;
+				}
+				else
+				{
+					count_intersection += n_intersection;
+				}
+			}
+			
+			//check all the segments of the inner boundary
+			if (poly.IBs != null){
+				for (InnerBoundary IB: poly.IBs){
+					for (int j = 0; j < IB.lr.pointArray.size()-1; j++){
+						Point st_pt = IB.lr.pointArray.get(j);
+						Point end_pt = IB.lr.pointArray.get(j + 1);
+						
+						Segment seg = new Segment(st_pt,end_pt);
+						n_intersection = r.Segment_Intersection(seg);
+						
+						//point on the segment
+						if (n_intersection == -1){ 
+							return true;
+						}
+						else
+						{
+							count_intersection += n_intersection;
+						}
+					}
+				}
+			} 
+		}
+		
+		
+		if (count_intersection % 2 == 0 ){
+			return false;
+		}
+		else return true;
 	}
 }
